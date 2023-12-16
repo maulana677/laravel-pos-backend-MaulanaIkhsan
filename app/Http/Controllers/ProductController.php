@@ -29,7 +29,9 @@ class ProductController extends Controller
     {
         $data = $request->all();
         \App\Models\Product::create($data);
-        return redirect()->route('product.index')->with('success', 'Product created successfully');
+
+        toast('Product created successfully', 'success')->width('400');
+        return redirect()->route('product.index');
     }
 
     public function edit($id)
@@ -43,13 +45,19 @@ class ProductController extends Controller
         $data = $request->all();
         $products = \App\Models\Product::findOrFail($id);
         $products->update($data);
-        return redirect()->route('product.index')->with('success', 'Product updated successfully');
+
+        toast('Product updated successfully', 'success')->width('400');
+        return redirect()->route('product.index');
     }
 
     public function destroy($id)
     {
-        $products = \App\Models\Product::findOrFail($id);
-        $products->delete();
-        return redirect()->route('product.index')->with('success', 'Product deleted successfully');
+        try {
+            $user = Product::findOrFail($id);
+            $user->delete();
+            return response(['status' => 'success', 'message' => 'User successfully deleted']);
+        } catch (\Throwable $th) {
+            return response(['status' => 'error', 'message' => 'There is something wrong!']);
+        }
     }
 }
