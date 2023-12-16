@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -33,7 +34,10 @@ class UserController extends Controller
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
         \App\Models\User::create($data);
-        return redirect()->route('user.index')->with('success', 'User successfully created');
+
+        toast('User successfully created', 'success')->width('400');
+
+        return redirect()->route('user.index');
     }
 
     public function edit($id)
@@ -46,12 +50,23 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $user->update($data);
-        return redirect()->route('user.index')->with('success', 'User successfully updated');
+
+        toast('User successfully updated', 'success')->width('400');
+
+        return redirect()->route('user.index');
     }
 
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
-        $user->delete();
-        return redirect()->route('user.index')->with('success', 'User successfully deleted');
+        // $user->delete();
+        // return redirect()->route('user.index')->with('success', 'User successfully deleted');
+
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return response(['status' => 'success', 'message' => 'User successfully deleted']);
+        } catch (\Throwable $th) {
+            return response(['status' => 'error', 'message' => 'There is something wrong!']);
+        }
     }
 }

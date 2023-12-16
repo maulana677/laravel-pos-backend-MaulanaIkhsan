@@ -68,9 +68,10 @@
                                             </th>
                                             <th>Name</th>
                                             <th>Category</th>
+                                            <th>Price</th>
                                             <th>Stock</th>
                                             <th>Created At</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         @foreach ($products as $product)
                                             <tr>
@@ -82,6 +83,9 @@
                                                 </td>
                                                 <td>
                                                     {{ $product->category }}
+                                                </td>
+                                                <td>
+                                                    {{ $product->price }}
                                                 </td>
                                                 <td>
                                                     {{ $product->stock }}

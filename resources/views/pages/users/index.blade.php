@@ -90,7 +90,12 @@
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('user.destroy', $user->id) }}"
+                                                        <a href='{{ route('user.destroy', $user->id) }}'
+                                                            class="btn btn-sm btn-danger btn-icon delete-item">
+                                                            <i class="fas fa-times"></i>
+                                                            Delete
+                                                        </a>
+                                                        {{--  <form action="{{ route('user.destroy', $user->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -98,7 +103,7 @@
                                                             <button class="btn btn-sm btn-danger btn-icon confirm-delete">
                                                                 <i class="fas fa-times"></i> Delete
                                                             </button>
-                                                        </form>
+                                                        </form>  --}}
                                                     </div>
                                                 </td>
                                             </tr>
