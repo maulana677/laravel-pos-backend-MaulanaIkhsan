@@ -50,6 +50,21 @@
                                     </div>
                                 @enderror
                             </div>
+
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="number"
+                                    class="form-control @error('price')
+                                is-invalid
+                            @enderror"
+                                    name="price">
+                                @error('price')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
                             <div class="form-group">
                                 <label>Stock</label>
                                 <input type="number"
@@ -64,6 +79,7 @@
                                     </div>
                                 @enderror
                             </div>
+
                             <div class="form-group">
                                 <label class="form-label">Category</label>
                                 <div class="selectgroup w-100">
@@ -80,8 +96,19 @@
                                         <input type="radio" name="category" value="snack" class="selectgroup-input">
                                         <span class="selectgroup-button">Snack</span>
                                     </label>
-
                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control"
+                                    @error('description')
+                                is-invalid
+                                @enderror
+                                    name="description"></textarea>
+                                @error('description')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="card-footer text-right">
