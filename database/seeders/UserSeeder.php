@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             'email' => 'maulana@fic11.com',
             'phone' => '089633755424',
             'roles' => 'ADMIN',
-            'password' => Hash::make('adminadmin'),
+            'password' => Hash::make('12345678'),
         ]);
     }
 }
