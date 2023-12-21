@@ -105,7 +105,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $users->links() }}
                                 </div>
                             </div>
                         </div>
