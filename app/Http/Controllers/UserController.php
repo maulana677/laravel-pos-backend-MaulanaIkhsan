@@ -56,17 +56,17 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
-        $user->delete();
-        return redirect()->route('user.index')->with('success', 'User successfully deleted');
+        // $user->delete();
+        // return redirect()->route('user.index')->with('success', 'User successfully deleted');
 
-        // try {
-        //     $user = User::findOrFail($id);
-        //     $user->delete();
-        //     return response(['status' => 'success', 'message' => 'User successfully deleted']);
-        // } catch (\Throwable $th) {
-        //     return response(['status' => 'error', 'message' => 'There is something wrong!']);
-        // }
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return response(['status' => 'success', 'message' => 'User successfully deleted']);
+        } catch (\Throwable $th) {
+            return response(['status' => 'error', 'message' => 'There is something wrong!']);
+        }
     }
 }
