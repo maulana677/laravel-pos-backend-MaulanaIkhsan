@@ -102,14 +102,23 @@
                                                 </td>
                                                 <td>{{ $product->created_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('product.edit', $product->id) }}"
-                                                        class="btn btn-primary">
-                                                        <i class="fas fa-edit"></i>Edit
-                                                    </a>
-                                                    <a href="{{ route('product.destroy', $product->id) }}"
-                                                        class="btn btn-danger delete-item">
-                                                        <i class="fas fa-trash-alt"></i>Delete
-                                                    </a>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href='{{ route('product.edit', $product->id) }}'
+                                                            class="btn btn-sm btn-info btn-icon">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                        </a>
+
+                                                        <form action="{{ route('product.destroy', $product->id) }}"
+                                                            method="POST" class="ml-2">
+                                                            <input type="hidden" name="_method" value="DELETE" />
+                                                            <input type="hidden" name="_token"
+                                                                value="{{ csrf_token() }}" />
+                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                                <i class="fas fa-times"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -71,12 +71,15 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        try {
-            $user = Product::findOrFail($id);
-            $user->delete();
-            return response(['status' => 'success', 'message' => 'User successfully deleted']);
-        } catch (\Throwable $th) {
-            return response(['status' => 'error', 'message' => 'There is something wrong!']);
-        }
+        // try {
+        //     $user = Product::findOrFail($id);
+        //     $user->delete();
+        //     return response(['status' => 'success', 'message' => 'User successfully deleted']);
+        // } catch (\Throwable $th) {
+        //     return response(['status' => 'error', 'message' => 'There is something wrong!']);
+        // }
+        $product = \App\Models\Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('product.index')->with('success', 'Product successfully deleted');
     }
 }
