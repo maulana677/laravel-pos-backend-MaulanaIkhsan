@@ -105,7 +105,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->links() }}
+                                    {{ $users->withQueryString()->links('pagination::bootstrap-4') }}
                                 </div>
                             </div>
                         </div>
