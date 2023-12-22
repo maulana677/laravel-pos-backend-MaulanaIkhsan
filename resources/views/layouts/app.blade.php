@@ -64,7 +64,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @include('sweetalert::alert')
 
-    <script>
+    {{--  <script>
         // add csrf token in ajax request
         $.ajaxSetup({
             headers: {
@@ -115,7 +115,7 @@
                 })
             })
         })
-    </script>
+    </script>  --}}
 
     @stack('scripts')
 
