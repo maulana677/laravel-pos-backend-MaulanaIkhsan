@@ -63,9 +63,9 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            <th class="text-left">
+                                            {{--  <th class="text-left">
                                                 No
-                                            </th>
+                                            </th>  --}}
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Created At</th>
@@ -73,9 +73,9 @@
                                         </tr>
                                         @foreach ($users as $user)
                                             <tr>
-                                                <td>
+                                                {{--  <td>
                                                     {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
-                                                </td>
+                                                </td>  --}}
                                                 <td>{{ $user->name }}
                                                 </td>
                                                 <td>
@@ -90,8 +90,8 @@
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('user.destroy', $user->id) }}"
-                                                            method="POST" class="ml-2">
+                                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                                            class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}" />
