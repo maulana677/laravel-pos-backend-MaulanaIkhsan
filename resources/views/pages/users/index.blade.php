@@ -63,9 +63,9 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            {{--  <th class="text-left">
+                                            <th class="text-left">
                                                 No
-                                            </th>  --}}
+                                            </th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Created At</th>
@@ -73,9 +73,9 @@
                                         </tr>
                                         @foreach ($users as $user)
                                             <tr>
-                                                {{--  <td>
+                                                <td>
                                                     {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
-                                                </td>  --}}
+                                                </td>
                                                 <td>{{ $user->name }}
                                                 </td>
                                                 <td>
