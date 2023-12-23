@@ -159,6 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         //FortifyServiceProvider
         App\Providers\FortifyServiceProvider::class,

@@ -10,13 +10,14 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = DB::table('products')
-            ->when($request->input('name'), function ($query, $name) {
-                return $query->where('name', 'like', '%' . $name . '%');
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        // $products = DB::table('products')
+        //     ->when($request->input('name'), function ($query, $name) {
+        //         return $query->where('name', 'like', '%' . $name . '%');
+        //     })
+        //     ->orderBy('created_at', 'desc')
+        //     ->paginate(10);
 
+        $products = Product::orderBy('id', 'DESC')->get();
         return view('pages.products.index', compact('products'));
     }
 
@@ -29,7 +30,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3|unique:products',
-            'description' => 'nullable|min:20',
+            'description' => 'nullable|min:3',
             'price' => 'required|integer',
             'stock' => 'required|integer',
             'category' => 'required|in:food,drink,snack',

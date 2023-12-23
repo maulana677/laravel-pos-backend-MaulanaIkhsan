@@ -39,7 +39,7 @@
                                 <h4>All Posts</h4>
                             </div>
                             <div class="card-body">
-                                <div class="float-left">
+                                {{--  <div class="float-left">
                                     <select class="form-control selectric">
                                         <option>Action For Selected</option>
                                         <option>Move to Draft</option>
@@ -56,60 +56,63 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div>  --}}
 
                                 <div class="clearfix mb-3"></div>
 
                                 <div class="table-responsive">
-                                    <table class="table-striped table">
-                                        <tr>
-                                            <th class="text-left">
-                                                No
-                                            </th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Created At</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        @foreach ($users as $user)
+                                    <table class="table-striped table" id="table">
+                                        <thead>
                                             <tr>
-                                                <td>
-                                                    {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
-                                                </td>
-                                                <td>{{ $user->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $user->email }}
-                                                </td>
-                                                <td>{{ $user->created_at }}</td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('user.edit', $user->id) }}'
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
-
-                                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST"
-                                                            class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                <th class="text-left">
+                                                    No
+                                                </th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Created At</th>
+                                                <th>Action</th>
                                             </tr>
-                                        @endforeach
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td>{{ ++$loop->index }}</td>
+                                                    <td>{{ $user->name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $user->email }}
+                                                    </td>
+                                                    <td>{{ $user->created_at }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <a href='{{ route('user.edit', $user->id) }}'
+                                                                class="btn btn-sm btn-info btn-icon">
+                                                                <i class="fas fa-edit"></i>
+                                                                Edit
+                                                            </a>
+
+                                                            <form action="{{ route('user.destroy', $user->id) }}"
+                                                                method="POST" class="ml-2">
+                                                                <input type="hidden" name="_method" value="DELETE" />
+                                                                <input type="hidden" name="_token"
+                                                                    value="{{ csrf_token() }}" />
+                                                                <button
+                                                                    class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                                    <i class="fas fa-times"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
 
 
                                     </table>
                                 </div>
-                                <div class="float-right">
+                                {{--  <div class="float-right">
                                     {{ $users->withQueryString()->links('pagination::bootstrap-4') }}
-                                </div>
+                                </div>  --}}
                             </div>
                         </div>
                     </div>
@@ -120,6 +123,11 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
+    </script>
     <!-- JS Libraies -->
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
 

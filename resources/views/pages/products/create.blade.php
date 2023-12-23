@@ -105,7 +105,7 @@
                                     @error('description')
                                 is-invalid
                                 @enderror
-                                    name="description"></textarea>
+                                    name="description" style="height: 100px"></textarea>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
