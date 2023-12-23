@@ -75,7 +75,7 @@ class ProductController extends Controller
         try {
             $user = Product::findOrFail($id);
             $user->delete();
-            return response(['status' => 'success', 'message' => 'User successfully deleted']);
+            return response(['status' => 'success', 'message' => 'Product successfully deleted']);
         } catch (\Throwable $th) {
             return response(['status' => 'error', 'message' => 'There is something wrong!']);
         }
