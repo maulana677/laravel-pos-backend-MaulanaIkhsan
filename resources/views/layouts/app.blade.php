@@ -64,9 +64,10 @@
     <script src="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @include('sweetalert::alert')
 
-    {{--  <script>
+    <script>
         // add csrf token in ajax request
         $.ajaxSetup({
             headers: {
@@ -117,7 +118,7 @@
                 })
             })
         })
-    </script>  --}}
+    </script>
 
     <!-- Template JS File -->
     <script src="{{ asset('js/scripts.js') }}"></script>
