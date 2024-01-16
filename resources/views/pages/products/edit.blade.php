@@ -27,7 +27,7 @@
             <div class="section-body">
                 <h2 class="section-title">Products</h2>
                 <div class="card">
-                    <form action="{{ route('product.update', $product) }}" method="POST">
+                    <form action="{{ route('product.update', $product) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="card-header">
@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text"
-                                    class="form-control 
+                                    class="form-control
                                 @error('name')
                                     is-invalid
                                 @enderror"
@@ -66,7 +66,7 @@
                             <div class="form-group">
                                 <label>Stock</label>
                                 <input type="number"
-                                    class="form-control 
+                                    class="form-control
                                 @error('stock')
                                     is-invalid
                                 @enderror"
@@ -108,6 +108,17 @@
                                     name="description">{{ $product->description }}</textarea>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label>Photo Product</label>
+                                <input type="file" class="form-control" name="image"
+                                    @error('image') is-invalid @enderror>
+                                @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>

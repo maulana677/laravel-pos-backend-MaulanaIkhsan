@@ -30,8 +30,6 @@
                 <p class="section-lead">
                     You can manage all Products, such as editing, deleting and more.
                 </p>
-
-
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">

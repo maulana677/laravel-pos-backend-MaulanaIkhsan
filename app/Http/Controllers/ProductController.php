@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -29,26 +30,36 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3|unique:products',
-            'description' => 'nullable|min:3',
+            'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'name'     => 'required|min:3',
+            'description'   => 'nullable|min:3',
             'price' => 'required|integer',
             'stock' => 'required|integer',
-            'category' => 'required|in:food,drink,snack',
-            'image' => 'required|image|mimes:png,jpg,jpeg'
+            'category' => 'required'
         ]);
 
         $filename = time() . '.' . $request->image->extension();
         $request->image->storeAs('public/products', $filename);
-        $data = $request->all();
+        // $data = $request->all();
 
-        $product = new \App\Models\Product;
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = (int) $request->price;
-        $product->stock = (int) $request->stock;
-        $product->category = $request->category;
-        $product->image = $filename;
-        $product->save();
+        // $product = new \App\Models\Product;
+        // $product->name = $request->name;
+        // $product->description = $request->description;
+        // $product->price = (int) $request->price;
+        // $product->stock = (int) $request->stock;
+        // $product->category = $request->category;
+        // $product->image = $filename;
+        // $product->save();
+
+        //create post
+        Product::create([
+            'image' => $filename,
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'category' => $request->category
+        ]);
 
         toast('Product created successfully', 'success')->width('400');
         return redirect()->route('product.index');
@@ -62,9 +73,24 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $products = \App\Models\Product::findOrFail($id);
-        $products->update($data);
+        $product = Product::findOrFail($id);
+
+        //check if image is uploaded
+        if ($request->hasFile('image')) {
+
+            //delete old image
+            Storage::delete('public/products/' . $product->image);
+
+            //upload new image
+            $filename = time() . '.' . $request->image->extension();
+            $request->image->storeAs('public/products/', $filename);
+
+            $data = $request->except('image');
+            $data['image'] = $filename;
+            $product->update($data);
+        } else {
+            $product->update($request->all());
+        }
 
         toast('Product updated successfully', 'success')->width('400');
         return redirect()->route('product.index');
@@ -73,8 +99,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
-            $user = Product::findOrFail($id);
-            $user->delete();
+            $product = Product::findOrFail($id);
+            Storage::delete('public/products/' . $product->image);
+            $product->delete();
             return response(['status' => 'success', 'message' => 'Product successfully deleted']);
         } catch (\Throwable $th) {
             return response(['status' => 'error', 'message' => 'There is something wrong!']);
