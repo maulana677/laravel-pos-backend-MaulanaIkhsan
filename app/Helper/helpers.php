@@ -43,3 +43,14 @@ function setSidebarActive($route)
         }
     }
 }
+
+if (!function_exists('currency_IDR')) {
+    function currency_IDR($price): string
+    {
+        if ("Rp. " . number_format($price, 0, ',', '.')) {
+            return "Rp. " . number_format($price, 0, ',', '.');
+        } else {
+            return $price . "Rp. " . number_format($price, 0, ',', '.');
+        }
+    }
+}

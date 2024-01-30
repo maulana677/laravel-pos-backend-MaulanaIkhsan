@@ -80,7 +80,7 @@
                                                         {{ $product->category }}
                                                     </td>
                                                     <td>
-                                                        {{ $product->price }}
+                                                        {{ currency_IDR($product->price) }}
                                                     </td>
                                                     <td>
                                                         {{ $product->stock }}
